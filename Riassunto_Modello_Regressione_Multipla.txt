@@ -1,0 +1,26 @@
+
+Call:
+lm(formula = `Mortality from exposure to ambient PM2.5` ~ `Percentage of population exposed to more than 10 micrograms/m3` + 
+    `Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent`, 
+    data = transposed_data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-97.519  -9.839   0.537  15.416  55.148 
+
+Coefficients:
+                                                                                        Estimate Std. Error t value
+(Intercept)                                                                             17.96503    1.91753   9.369
+`Percentage of population exposed to more than 10 micrograms/m3`                         0.23046    0.02903   7.939
+`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent` 86.11695    0.41019 209.942
+                                                                                        Pr(>|t|)    
+(Intercept)                                                                              < 2e-16 ***
+`Percentage of population exposed to more than 10 micrograms/m3`                        7.56e-15 ***
+`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent`  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 22.81 on 741 degrees of freedom
+Multiple R-squared:  0.9901,	Adjusted R-squared:   0.99 
+F-statistic: 3.687e+04 on 2 and 741 DF,  p-value: < 2.2e-16
+

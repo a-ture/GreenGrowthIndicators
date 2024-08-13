@@ -1,0 +1,20 @@
+
+Call:
+lm(formula = `Demand-based CO2 emissions` ~ `Production-based CO2 emissions`, 
+    data = transposed_data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1253.03   -38.19   -20.13    11.83  1260.29 
+
+Coefficients:
+                                  Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                      42.029084   9.479174   4.434 1.07e-05 ***
+`Production-based CO2 emissions`  0.969211   0.005886 164.668  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 232.9 on 742 degrees of freedom
+Multiple R-squared:  0.9734,	Adjusted R-squared:  0.9733 
+F-statistic: 2.712e+04 on 1 and 742 DF,  p-value: < 2.2e-16
+
