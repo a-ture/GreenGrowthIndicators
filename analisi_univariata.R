@@ -122,6 +122,27 @@ crea_grafico_per_continente <- function(dataset, titolo, x_lab, directory_destin
   }
 }
 
+# Funzione per calcolare le statistiche descrittive
+calcola_statistiche_descrittive <- function(dataset) {
+  statistiche <- dataset %>%
+    summarise(
+      Media = mean(Value, na.rm = TRUE),
+      Mediana = median(Value, na.rm = TRUE),
+      Deviazione_Standard = sd(Value, na.rm = TRUE),
+      Minimo = min(Value, na.rm = TRUE),
+      Massimo = max(Value, na.rm = TRUE),
+      Q1 = quantile(Value, 0.25, na.rm = TRUE),
+      Q3 = quantile(Value, 0.75, na.rm = TRUE),
+      Asimmetria = e1071::skewness(Value, na.rm = TRUE),
+      Curtosi = e1071::kurtosis(Value, na.rm = TRUE),
+      Varianza = var(Value, na.rm = TRUE),
+      Coefficiente_di_Variazione = sd(Value, na.rm = TRUE) / mean(Value, na.rm = TRUE)
+    )
+  
+  return(statistiche)
+}
+
+
 # Creare la cartella principale "AnalisiUnivariata"
 cartella_principale <- "AnalisiUnivariata"
 if (!file.exists(cartella_principale)) {
@@ -145,6 +166,7 @@ variabili_interesse <- c(
   "Marine protected area, % total exclusive economic zone"
 )
 
+
 # Loop attraverso ciascuna variabile
 for (variabile in variabili_interesse) {
   
@@ -161,6 +183,12 @@ for (variabile in variabili_interesse) {
   
   # Filtra il dataset per la variabile corrente
   dataset_var <- filter(dataset, Variable == variabile)
+  
+  # Calcolo delle statistiche descrittive
+  statistiche_descrittive <- calcola_statistiche_descrittive(dataset_var)
+  
+  # Salva le statistiche descrittive come CSV
+  write.csv(statistiche_descrittive, file.path(directory_destinazione, paste0("statistiche_descrittive_", crea_nome_file_sicuro(variabile), ".csv")), row.names = FALSE)
   
   # Creazione e salvataggio di grafici
   crea_e_salva_grafico(

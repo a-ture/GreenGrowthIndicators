@@ -1,0 +1,8 @@
+                                                                                             2.5 %
+(Intercept)                                                                             14.2005924
+`Percentage of population exposed to more than 10 micrograms/m3`                         0.1734723
+`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent` 85.3116640
+                                                                                            97.5 %
+(Intercept)                                                                             21.7294645
+`Percentage of population exposed to more than 10 micrograms/m3`                         0.2874541
+`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent` 86.9222286
