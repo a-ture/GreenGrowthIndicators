@@ -1,0 +1,41 @@
+
+Call:
+lm(formula = `Percentage of population exposed to more than 10 micrograms/m3` ~ 
+    poly(`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent`, 
+        2), data = prepara_dati_per_modello(transposed_data, 
+    `Percentage of population exposed to more than 10 micrograms/m3` ~ 
+        poly(`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent`, 
+            2)))
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-46.907 -14.929  -2.211  15.370  61.315 
+
+Coefficients:
+                                                                                                   Estimate
+(Intercept)                                                                                         74.2039
+poly(`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent`, 2)1  607.2001
+poly(`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent`, 2)2 -567.5197
+                                                                                                  Std. Error
+(Intercept)                                                                                           0.7322
+poly(`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent`, 2)1    19.9708
+poly(`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent`, 2)2    19.9708
+                                                                                                  t value
+(Intercept)                                                                                        101.35
+poly(`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent`, 2)1   30.40
+poly(`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent`, 2)2  -28.42
+                                                                                                  Pr(>|t|)
+(Intercept)                                                                                         <2e-16
+poly(`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent`, 2)1   <2e-16
+poly(`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent`, 2)2   <2e-16
+                                                                                                     
+(Intercept)                                                                                       ***
+poly(`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent`, 2)1 ***
+poly(`Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent`, 2)2 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 19.97 on 741 degrees of freedom
+Multiple R-squared:  0.7004,	Adjusted R-squared:  0.6996 
+F-statistic:   866 on 2 and 741 DF,  p-value: < 2.2e-16
+

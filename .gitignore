@@ -49,3 +49,11 @@ po/*~
 rsconnect/
 .DS_Store
 
+# Ignora file PDF nella cartella AnalisiUnivariata
+/AnalisiUnivariata/*.pdf
+
+# Ignora file PDF nella cartella Correlazione
+/Correlazione/*.pdf
+
+/AnalisiUnivariata/**/*.pdf
+/Correlazione/**/*.pdf

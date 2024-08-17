@@ -1,0 +1,8 @@
+                                                                                               2.5 %
+(Intercept)                                                                                 71.66155
+poly(`Population with access to improved drinking water sources, % total population`, 2)1 -314.55319
+poly(`Population with access to improved drinking water sources, % total population`, 2)2 -109.39918
+                                                                                              97.5 %
+(Intercept)                                                                                 76.74622
+poly(`Population with access to improved drinking water sources, % total population`, 2)1 -175.86168
+poly(`Population with access to improved drinking water sources, % total population`, 2)2   29.29232

@@ -1,0 +1,3 @@
+                                                             2.5 %     97.5 %
+(Intercept)                                             90.3989655 96.7090181
+`Renewable electricity, % total electricity generation` -0.8498872 -0.6738513

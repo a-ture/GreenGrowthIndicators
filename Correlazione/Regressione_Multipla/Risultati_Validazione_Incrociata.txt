@@ -1,0 +1,1 @@
+L'errore quadratico medio (MSE) sul set di test è: 38458.24 

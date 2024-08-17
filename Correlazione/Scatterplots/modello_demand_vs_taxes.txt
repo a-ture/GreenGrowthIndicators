@@ -1,0 +1,22 @@
+
+Call:
+lm(formula = `Environmentally related taxes, % GDP` ~ poly(`Demand-based CO2 emissions`, 
+    2), data = prepara_dati_per_modello(transposed_data, `Environmentally related taxes, % GDP` ~ 
+    poly(`Demand-based CO2 emissions`, 2)))
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.6392 -0.4673  0.0909  0.4262  2.8705 
+
+Coefficients:
+                                        Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                              2.12017    0.02943   72.03   <2e-16 ***
+poly(`Demand-based CO2 emissions`, 2)1 -10.51710    0.80281  -13.10   <2e-16 ***
+poly(`Demand-based CO2 emissions`, 2)2   8.48353    0.80281   10.57   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.8028 on 741 degrees of freedom
+Multiple R-squared:  0.2766,	Adjusted R-squared:  0.2746 
+F-statistic: 141.6 on 2 and 741 DF,  p-value: < 2.2e-16
+

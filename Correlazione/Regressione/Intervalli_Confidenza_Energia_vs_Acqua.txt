@@ -1,0 +1,4 @@
+                                                                2.5 %     97.5 %
+(Intercept)                                                  23.88916   26.90570
+poly(`Renewable energy supply, % total energy supply`, 2)1 -242.97679 -160.69635
+poly(`Renewable energy supply, % total energy supply`, 2)2  -40.44952   41.83092

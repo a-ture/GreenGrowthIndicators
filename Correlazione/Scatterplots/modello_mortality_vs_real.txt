@@ -1,0 +1,21 @@
+
+Call:
+lm(formula = `Mortality from exposure to ambient PM2.5` ~ log(`Real GDP per capita`), 
+    data = prepara_dati_per_modello(transposed_data, `Mortality from exposure to ambient PM2.5` ~ 
+        log(`Real GDP per capita`)))
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-363.9 -153.4  -46.0  116.4  674.8 
+
+Coefficients:
+                           Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                 1548.68     109.26   14.17   <2e-16 ***
+log(`Real GDP per capita`)  -115.39      10.65  -10.84   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 212.4 on 742 degrees of freedom
+Multiple R-squared:  0.1366,	Adjusted R-squared:  0.1355 
+F-statistic: 117.4 on 1 and 742 DF,  p-value: < 2.2e-16
+

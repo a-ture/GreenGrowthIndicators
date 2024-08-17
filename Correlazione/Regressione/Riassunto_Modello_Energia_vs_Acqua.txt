@@ -1,0 +1,20 @@
+
+Call:
+lm(formula = formula, data = data)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-28.219 -15.156  -4.082  10.372  68.576 
+
+Coefficients:
+                                                            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)                                                  25.3974     0.7683  33.057   <2e-16 ***
+poly(`Renewable energy supply, % total energy supply`, 2)1 -201.8366    20.9560  -9.631   <2e-16 ***
+poly(`Renewable energy supply, % total energy supply`, 2)2    0.6907    20.9560   0.033    0.974    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 20.96 on 741 degrees of freedom
+Multiple R-squared:  0.1113,	Adjusted R-squared:  0.1089 
+F-statistic: 46.38 on 2 and 741 DF,  p-value: < 2.2e-16
+

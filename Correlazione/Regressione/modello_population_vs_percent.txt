@@ -1,0 +1,32 @@
+
+Call:
+lm(formula = formula, data = data)
+
+Residuals:
+   Min     1Q Median     3Q    Max 
+-80.62 -15.41  14.53  26.82  32.14 
+
+Coefficients:
+                                                                                          Estimate
+(Intercept)                                                                                 74.204
+poly(`Population with access to improved drinking water sources, % total population`, 2)1 -245.207
+poly(`Population with access to improved drinking water sources, % total population`, 2)2  -40.053
+                                                                                          Std. Error
+(Intercept)                                                                                    1.295
+poly(`Population with access to improved drinking water sources, % total population`, 2)1     35.323
+poly(`Population with access to improved drinking water sources, % total population`, 2)2     35.323
+                                                                                          t value
+(Intercept)                                                                                57.300
+poly(`Population with access to improved drinking water sources, % total population`, 2)1  -6.942
+poly(`Population with access to improved drinking water sources, % total population`, 2)2  -1.134
+                                                                                          Pr(>|t|)    
+(Intercept)                                                                                < 2e-16 ***
+poly(`Population with access to improved drinking water sources, % total population`, 2)1 8.46e-12 ***
+poly(`Population with access to improved drinking water sources, % total population`, 2)2    0.257    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 35.32 on 741 degrees of freedom
+Multiple R-squared:  0.06259,	Adjusted R-squared:  0.06006 
+F-statistic: 24.74 on 2 and 741 DF,  p-value: 3.983e-11
+
