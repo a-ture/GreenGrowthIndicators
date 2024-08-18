@@ -77,7 +77,7 @@ dataset <- dataset %>%
 
 # Rimuovi le colonne non necessarie per l'analisi
 dataset <- dataset %>%
-  select(-c("COU", "Year", "VAR", "PowerCode", "PowerCode Code", 
+  dplyr::select(-c("COU", "Year", "VAR", "PowerCode", "PowerCode Code", 
             "Reference Period Code", "Reference Period", "Unit Code", 
             "Flag Codes", "Flags"))
 
@@ -220,14 +220,14 @@ dataset_acqua_long <- dataset_acqua %>%
   mutate(YEA = str_replace(YEA, "^X", "")) %>%
   mutate(YEA = as.numeric(YEA)) %>%
   filter(YEA >= 1995 & YEA <= 2021) %>%
-  select(Country = `Country.Name`, YEA, Water_Stress)
+  dplyr::select(Country = `Country.Name`, YEA, Water_Stress)
 
 dataset_population_long <- dataset_population %>%
   pivot_longer(cols = matches("^X\\d{4}$"), names_to = "YEA", values_to = "Value_Pop") %>%
   mutate(YEA = str_replace(YEA, "^X", "")) %>%
   mutate(YEA = as.numeric(YEA)) %>%
   filter(YEA >= 1995 & YEA <= 2021) %>%
-  select(Country = `Country.Name`, YEA, Value_Pop)
+  dplyr::select(Country = `Country.Name`, YEA, Value_Pop)
 
 # Filtra i dataset aggiuntivi per includere solo i paesi selezionati
 dataset_acqua_long <- dataset_acqua_long %>%
@@ -243,10 +243,10 @@ dataset_population_long$Country <- traduzioni[dataset_population_long$Country]
 dataset <- dataset %>%
   left_join(dataset_acqua_long, by = c("Country", "YEA")) %>%
   mutate(Value = ifelse(Variable == "Water stress, total freshwater abstraction as % total available renewable resources", Water_Stress, Value)) %>%
-  select(-Water_Stress) %>%
+  dplyr::select(-Water_Stress) %>%
   left_join(dataset_population_long, by = c("Country", "YEA")) %>%
   mutate(Value = ifelse(Variable == "Population with access to improved drinking water sources, % total population" & is.na(Value), Value_Pop, Value)) %>%
-  select(-Value_Pop)
+  dplyr::select(-Value_Pop)
 
 # Imputa valori per i paesi privi di accesso a mari (es. Lussemburgo, Ungheria)
 dataset <- dataset %>%
