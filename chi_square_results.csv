@@ -1,0 +1,14 @@
+"Country_Variable","P_Value","Chi_Square_Value","Chi2_Crit_Upper","Chi2_Crit_Lower"
+"Italia - Production-based CO2 emissions",0.801251956901201,1,5.02388618731488,0.000982069117175256
+"Italia - Demand-based CO2 emissions",0.953642173096255,0.333333333333333,5.02388618731488,0.000982069117175256
+"Italia - Renewable energy supply, % total energy supply",0.171797144296733,5,5.02388618731488,0.000982069117175256
+"Italia - Renewable electricity, % total electricity generation",0.299780588595712,3.66666666666667,5.02388618731488,0.000982069117175256
+"Italia - Population with access to improved drinking water sources, % total population",5.88735558357766e-06,27,5.02388618731488,0.000982069117175256
+"Italia - Water stress, total freshwater abstraction as % total available renewable resources",0.0292908865348882,9,5.02388618731488,0.000982069117175256
+"Italia - Mortality from exposure to ambient PM2.5",0.261464129949111,4,5.02388618731488,0.000982069117175256
+"Italia - Percentage of population exposed to more than 10 micrograms/m3",0.0396023552075641,8.33333333333333,5.02388618731488,0.000982069117175256
+"Italia - Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent",0.506165219093908,2.33333333333333,5.02388618731488,0.000982069117175256
+"Italia - Environmentally related taxes, % GDP",0.227647113061301,4.33333333333333,5.02388618731488,0.000982069117175256
+"Italia - Real GDP per capita",0.644369805637025,1.66666666666667,5.02388618731488,0.000982069117175256
+"Italia - Terrestrial protected area, % land area",0.261464129949111,4,5.02388618731488,0.000982069117175256
+"Italia - Marine protected area, % total exclusive economic zone",0.0251721399769511,9.33333333333333,5.02388618731488,0.000982069117175256
