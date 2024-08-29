@@ -1,6 +1,43 @@
 # Creare una copia del dataset originale
 dataset_copy <- dataset
 
+# Dataset di esempio con variabili selezionate
+variabili_selezionate <- c(
+  "Production-based CO2 emissions",
+  "Demand-based CO2 emissions",
+  "Renewable electricity, % total electricity generation",
+  "Real GDP per capita"
+)
+
+# Data frame per conservare i risultati
+risultati <- data.frame(
+  Variabile = character(),
+  Media = numeric(),
+  Deviazione_Standard = numeric(),
+  Campione = integer(),
+  stringsAsFactors = FALSE
+)
+
+# Iterare attraverso ciascuna variabile e calcolare i parametri statistici
+for (variabile in variabili_selezionate) {
+  data_subset <- dataset %>%
+    filter(Country == "Spagna" & Variable == variabile & !is.na(Value))
+  
+  media <- mean(data_subset$Value, na.rm = TRUE)
+  deviazione_standard <- sd(data_subset$Value, na.rm = TRUE)
+  n <- nrow(data_subset)
+  
+  risultati <- rbind(risultati, data.frame(
+    Variabile = variabile,
+    Media = round(media, 2),
+    Deviazione_Standard = round(deviazione_standard, 2),
+    Campione = n
+  ))
+}
+
+# Stampare i risultati in formato tabellare
+print(risultati)
+
 # Creare la cartella "inferenzastatistica" se non esiste già
 dir.create("inferenzastatistica", showWarnings = FALSE)
 
@@ -83,17 +120,27 @@ variabili_selezionate <- c(
 )
 
 # Funzione per eseguire il test chi-quadrato con intervalli personalizzati
-chi_square_test_custom <- function(data, breaks) {
+chi_square_test_custom <- function(data, breaks, variable_name) {
   # Assicurarsi che i dati siano numerici
   if (!is.numeric(data)) {
     stop("'data' deve essere numerico")
   }
   
+  # Categorizzare i dati in intervalli
   categories <- cut(data, breaks = breaks, include.lowest = TRUE, right = FALSE)
   
+  # Calcolare le frequenze osservate e attese
   observed_frequencies <- table(categories)
   expected_frequencies <- rep(length(data) / length(observed_frequencies), length(observed_frequencies))
   
+  # Stampare i limiti degli intervalli, il numero di elementi in ciascun intervallo e il nome della variabile
+  cat("Variabile:", variable_name, "\n")
+  print("Limiti degli intervalli e numero di elementi:")
+  for (i in 1:(length(breaks) - 1)) {
+    cat("Intervallo", i, ": [", breaks[i], ",", breaks[i + 1], "), Frequenza:", observed_frequencies[i], "\n")
+  }
+  
+  # Verificare che le frequenze attese siano tutte maggiori o uguali a 5
   if (all(expected_frequencies >= 5)) {
     chi2_test <- chisq.test(observed_frequencies, p = expected_frequencies / sum(expected_frequencies))
     
@@ -111,6 +158,9 @@ chi_square_test_custom <- function(data, breaks) {
   }
 }
 
+
+
+
 # Fase di esplorazione e verifica delle ipotesi
 chi_square_results <- list()
 method_of_moments_results <- list()
@@ -127,7 +177,7 @@ for (country in paesi_selezionati) {
       
       # Test chi-quadrato
       breaks_4 <- calculate_intervals(data_subset$Value, num_intervals = 4)
-      chi2_result_4 <- chi_square_test_custom(data_subset$Value, breaks = breaks_4)
+      chi2_result_4 <- chi_square_test_custom(data_subset$Value, breaks = breaks_4,variable)
       
       chi_square_results[[paste(country, variable, sep = " - ")]] <- chi2_result_4
     }
@@ -155,8 +205,8 @@ compare_normality <- function(data, group1_year, group2_year, variable, num_inte
     filter(YEA == group2_year & Variable == variable & Country %in% paesi) %>%
     pull(Value)
   
-  result_group1 <- if (length(data_group1) > 10) chi_square_test_custom(data_group1, calculate_intervals(data_group1, num_intervals)) else NULL
-  result_group2 <- if (length(data_group2) > 10) chi_square_test_custom(data_group2, calculate_intervals(data_group2, num_intervals)) else NULL
+  result_group1 <- if (length(data_group1) > 10) chi_square_test_custom(data_group1, calculate_intervals(data_group1, num_intervals,variable)) else NULL
+  result_group2 <- if (length(data_group2) > 10) chi_square_test_custom(data_group2, calculate_intervals(data_group2, num_intervals,variable)) else NULL
   
   return(list(group1 = result_group1, group2 = result_group2))
 }
@@ -166,38 +216,82 @@ compare_normality_results <- compare_normality(dataset_copy, 1990, 2000, "Real G
 compare_normality_df <- do.call(rbind, lapply(compare_normality_results, as.data.frame))
 write.csv(compare_normality_df, "inferenzastatistica/compare_normality_results.csv", row.names = TRUE)
 
-# Calcolo degli intervalli di confidenza
-confidence_intervals <- list()
+# Creare un data frame per raccogliere tutti gli intervalli di confidenza con le etichette appropriate
+confidence_intervals_df <- data.frame(
+  Country = character(),
+  Variable = character(),
+  Method = character(),
+  Lower_Bound = numeric(),
+  Upper_Bound = numeric(),
+  stringsAsFactors = FALSE
+)
 
-for (country in paesi_selezionati) {
-  for (variable in variabili_selezionate) {
-    data_subset <- dataset %>%
-      filter(Country == country & Variable == variable & !is.na(Value))
+variabili_normali <- c(
+  "Production-based CO2 emissions",
+  "Demand-based CO2 emissions",
+  "Renewable electricity, % total electricity generation",
+  "Real GDP per capita",
+  "Mortality from exposure to ambient PM2.5",
+  "Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent",
+  "Environmentally related taxes, % GDP",
+  "Terrestrial protected area, % land area"
+  
+)
+
+# Iterazione su ciascuna variabile normale per calcolare gli intervalli di confidenza
+for (variable in variabili_normali) {
+  data_subset <- dataset %>%
+    filter(Country == country & Variable == variable & !is.na(Value)) %>%
+    pull(Value)
+  
+  if (length(data_subset) > 10) {
+    sigma_known <- sd(data_subset, na.rm = TRUE)
+    mu_known <- mean(data_subset, na.rm = TRUE)
     
-    if (nrow(data_subset) > 10) {
-      chi2_result <- chi_square_test_custom(data_subset$Value, calculate_intervals(data_subset$Value, 4))
-      
-      if (chi2_result$normal_distribution) {
-        sigma_known <- sd(data_subset$Value, na.rm = TRUE)
-        mu_known <- mean(data_subset$Value, na.rm = TRUE)
-        
-        conf_interval_i <- confidence_interval_mean_var_known(data_subset$Value, sigma = sigma_known)
-        conf_interval_ii <- confidence_interval_mean_var_unknown(data_subset$Value)
-        conf_interval_iii <- confidence_interval_variance_mean_known(data_subset$Value, mu = mu_known)
-        conf_interval_iv <- confidence_interval_variance_mean_unknown(data_subset$Value)
-        
-        confidence_intervals[[paste(country, variable, "Mean_Var_Known", sep = " - ")]] <- conf_interval_i
-        confidence_intervals[[paste(country, variable, "Mean_Var_Unknown", sep = " - ")]] <- conf_interval_ii
-        confidence_intervals[[paste(country, variable, "Var_Mean_Known", sep = " - ")]] <- conf_interval_iii
-        confidence_intervals[[paste(country, variable, "Var_Mean_Unknown", sep = " - ")]] <- conf_interval_iv
-      }
-    }
+    # Intervalli di confidenza per la media con varianza nota
+    conf_interval_i <- confidence_interval_mean_var_known(data_subset, sigma = sigma_known)
+    confidence_intervals_df <- rbind(confidence_intervals_df, data.frame(
+      Country = country,
+      Variable = variable,
+      Method = "Mean with Known Variance",
+      Lower_Bound = conf_interval_i[1],
+      Upper_Bound = conf_interval_i[2]
+    ))
+    
+    # Intervalli di confidenza per la media con varianza non nota
+    conf_interval_ii <- confidence_interval_mean_var_unknown(data_subset)
+    confidence_intervals_df <- rbind(confidence_intervals_df, data.frame(
+      Country = country,
+      Variable = variable,
+      Method = "Mean with Unknown Variance",
+      Lower_Bound = conf_interval_ii[1],
+      Upper_Bound = conf_interval_ii[2]
+    ))
+    
+    # Intervalli di confidenza per la varianza con media nota
+    conf_interval_iii <- confidence_interval_variance_mean_known(data_subset, mu = mu_known)
+    confidence_intervals_df <- rbind(confidence_intervals_df, data.frame(
+      Country = country,
+      Variable = variable,
+      Method = "Variance with Known Mean",
+      Lower_Bound = conf_interval_iii[1],
+      Upper_Bound = conf_interval_iii[2]
+    ))
+    
+    # Intervalli di confidenza per la varianza con media non nota
+    conf_interval_iv <- confidence_interval_variance_mean_unknown(data_subset)
+    confidence_intervals_df <- rbind(confidence_intervals_df, data.frame(
+      Country = country,
+      Variable = variable,
+      Method = "Variance with Unknown Mean",
+      Lower_Bound = conf_interval_iv[1],
+      Upper_Bound = conf_interval_iv[2]
+    ))
   }
 }
 
 # Salvare gli intervalli di confidenza in un file CSV nella cartella "inferenzastatistica"
-confidence_intervals_df <- do.call(rbind, lapply(confidence_intervals, function(x) t(as.data.frame(x))))
-write.csv(confidence_intervals_df, "inferenzastatistica/confidence_intervals.csv", row.names = TRUE)
+write.csv(confidence_intervals_df, "inferenzastatistica/confidence_intervals_all_cases_labeled.csv", row.names = FALSE)
 
 # Confronto tra due paesi su tutta la serie storica per variabili normali
 country1 <- "Italia"
