@@ -407,45 +407,114 @@ for (i in 1:nrow(confronti)) {
   confronti$pvalue[i] <- risultati$pvalue
 }
 
-# Funzione per generare il grafico della distribuzione di Student
-crea_grafico_student <- function(t_statistic, critical_value, pvalue, n, file_name) {
-  file_name <- gsub(" ", "_", file_name) 
-  file_name <- gsub("[^A-Za-z0-9_]", "", file_name) 
-  file_name <- paste0(file_name, ".png")
-  file_path <- file.path("inferenzastatistica", file_name)
-  
-  png(file_path, width = 800, height = 600)
-  
-  curve(dt(x, df = n - 1), from = -3, to = 15, axes = FALSE,
-        ylim = c(0, 0.5), xlab = "", ylab = "", 
-        main = paste("Densità di Student -", file_name))
-  
-  text(0, 0.45, "Regione di\naccettazione", cex = 0.8)
-  
-  axis(1, at = c(-3, critical_value, 0, t_statistic, 15), 
-       labels = c("", round(critical_value, 6), "", round(t_statistic, 2), ""))
-  
-  vals <- seq(-3, critical_value, length = 100)
-  polygon(c(-3, vals, critical_value), c(0, dt(vals, df = n - 1), 0), 
-          density = 20, angle = 45, col = "red")
-  
-  abline(h = 0)
-  
-  text(critical_value - 0.5, 0.05, expression(alpha), cex = 0.8)
-  text(critical_value - 1, 0.1, "Regione di\nrifiuto", cex = 0.8)
-  
-  text(0, 0.1, expression(1 - alpha), cex = 0.8)
-  
-  box()
-  
-  dev.off()
+# Creazione della cartella per salvare i grafici se non esiste già
+dir.create("inferenzastatistica", showWarnings = FALSE)
+
+### TEST PER LE EMISSIONI DI CO2 ###
+
+# Valore ipotizzato per la media delle emissioni di CO2 (in milioni di tonnellate)
+mu0_co2 <- 300
+
+# Calcolo della media campionaria e della deviazione standard campionaria per l'Italia
+mean_italia_co2 <- mean(dataset$Value[dataset$Country == "Italia" & dataset$Variable == "Production-based CO2 emissions"], na.rm = TRUE)
+sd_italia_co2 <- sd(dataset$Value[dataset$Country == "Italia" & dataset$Variable == "Production-based CO2 emissions"], na.rm = TRUE)
+n_italia_co2 <- sum(!is.na(dataset$Value[dataset$Country == "Italia" & dataset$Variable == "Production-based CO2 emissions"]))
+
+# Statistica del test Z per un test unilaterale sinistro
+z_statistic_co2 <- (mean_italia_co2 - mu0_co2) / (sd_italia_co2 / sqrt(n_italia_co2))
+
+# Calcolo del p-value per un test unilaterale sinistro
+p_value_co2 <- pnorm(z_statistic_co2)
+
+# Livello di significatività
+alpha <- 0.05
+z_critico_co2 <- qnorm(alpha)
+
+# Stampa dei risultati per il test sulle emissioni di CO2
+cat("Statistica Z per le emissioni di CO2:", z_statistic_co2, "\n")
+cat("p-value per le emissioni di CO2:", p_value_co2, "\n")
+
+# Decisione
+if (p_value_co2 < alpha) {
+  decisione_co2 <- "Rifiutiamo l'ipotesi nulla"
+} else {
+  decisione_co2 <- "Non rifiutiamo l'ipotesi nulla"
 }
 
-# Itera su ogni variabile e crea il grafico corrispondente
-for (i in 1:nrow(confronti)) {
-  file_name <- paste0("grafico_densita_student_", gsub(" ", "_", confronti$variabile[i]))
-  
-  crea_grafico_student(confronti$t_statistic[i], confronti$critical_value[i], 
-                       confronti$pvalue[i], n, file_name)
+print(decisione_co2)
+
+# Creazione del grafico per il test sulle emissioni di CO2
+png("inferenzastatistica/grafico_test_unilaterale_sinistro_co2.png", width = 800, height = 600)
+
+curve(dnorm(x), from = -4, to = 4, col = "blue", lwd = 2, ylab = "Densità", xlab = "Z", main = "Test unilaterale sinistro (CO2)")
+abline(v = z_critico_co2, col = "red", lty = 2)  # Linea verticale al valore critico
+
+# Area di rifiuto
+x_vals_co2 <- seq(-4, z_critico_co2, length = 100)
+polygon(c(x_vals_co2, z_critico_co2), c(dnorm(x_vals_co2), 0), col = rgb(1, 0, 0, 0.5), border = NA)
+
+# Aggiungere la statistica Z osservata
+abline(v = z_statistic_co2, col = "green", lwd = 2)
+
+# Etichette
+text(z_statistic_co2, 0.2, paste("Z osservato =", round(z_statistic_co2, 2)), pos = 4, col = "green")
+text(z_critico_co2, 0.05, expression(paste("Z", alpha)), pos = 4, col = "red")
+text(-3, 0.1, "Regione di rifiuto", col = "red", pos = 4)
+text(-1, 0.15, "Regione di accettazione", col = "blue", pos = 4)  # Posizione x = 1, y = 0.15
+
+dev.off()
+
+### TEST PER L'ENERGIA RINNOVABILE ###
+
+# Valore ipotizzato per la percentuale di energia rinnovabile
+mu0_renewable <- 50  # Ad esempio, 50%
+
+# Calcolo della media campionaria e della deviazione standard campionaria per l'Italia
+mean_italia_renewable <- mean(dataset$Value[dataset$Country == "Italia" & dataset$Variable == "Renewable electricity, % total electricity generation"], na.rm = TRUE)
+sd_italia_renewable <- sd(dataset$Value[dataset$Country == "Italia" & dataset$Variable == "Renewable electricity, % total electricity generation"], na.rm = TRUE)
+n_italia_renewable <- sum(!is.na(dataset$Value[dataset$Country == "Italia" & dataset$Variable == "Renewable electricity, % total electricity generation"]))
+
+# Statistica del test Z per un test unilaterale destro
+z_statistic_renewable <- (mean_italia_renewable - mu0_renewable) / (sd_italia_renewable / sqrt(n_italia_renewable))
+
+# Calcolo del p-value per un test unilaterale destro
+p_value_renewable <- 1 - pnorm(z_statistic_renewable)
+
+# Livello di significatività
+z_critico_renewable <- qnorm(1 - alpha)
+
+# Stampa dei risultati per il test sull'energia rinnovabile
+cat("Statistica Z per l'energia rinnovabile:", z_statistic_renewable, "\n")
+cat("p-value per l'energia rinnovabile:", p_value_renewable, "\n")
+
+# Decisione
+if (p_value_renewable < alpha) {
+  decisione_renewable <- "Rifiutiamo l'ipotesi nulla: la media della percentuale di energia rinnovabile è significativamente superiore a 50%."
+} else {
+  decisione_renewable <- "Non rifiutiamo l'ipotesi nulla: non ci sono prove sufficienti per dire che la media della percentuale di energia rinnovabile è superiore a 50%."
 }
+
+print(decisione_renewable)
+
+# Creazione del grafico per il test sull'energia rinnovabile
+png("inferenzastatistica/grafico_test_unilaterale_destro_renewable.png", width = 800, height = 600)
+
+curve(dnorm(x), from = -4, to = 4, col = "blue", lwd = 2, ylab = "Densità", xlab = "Z", main = "Test unilaterale destro (Energia Rinnovabile)")
+abline(v = z_critico_renewable, col = "red", lty = 2)  # Linea verticale al valore critico
+
+# Area di rifiuto
+x_vals_renewable <- seq(z_critico_renewable, 4, length = 100)
+polygon(c(z_critico_renewable, x_vals_renewable), c(0, dnorm(x_vals_renewable)), col = rgb(1, 0, 0, 0.5), border = NA)
+
+# Aggiungere la statistica Z osservata
+abline(v = z_statistic_renewable, col = "green", lwd = 2)
+
+# Etichette
+text(z_statistic_renewable, 0.2, paste("Z osservato =", round(z_statistic_renewable, 2)), pos = 4, col = "green")
+text(z_critico_renewable, 0.05, expression(paste("Z", alpha)), pos = 4, col = "red")
+text(2.5, 0.1, "Regione di rifiuto", col = "red", pos = 4)
+text(-1, 0.15, "Regione di accettazione", col = "blue", pos = 4)  # Posizione x = -1, y = 0.15
+
+dev.off()
+
 
