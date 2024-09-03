@@ -1,33 +1,33 @@
 "Country","Variable","Method","Lower_Bound","Upper_Bound"
-"Spagna","Production-based CO2 emissions","Mean with Known Variance",256.632330057411,284.996003275922
-"Spagna","Production-based CO2 emissions","Mean with Unknown Variance",255.845848645078,285.782484688255
-"Spagna","Production-based CO2 emissions","Variance with Known Mean",734.188838310652,2330.48269528091
-"Spagna","Production-based CO2 emissions","Variance with Unknown Mean",759.033220734749,2472.5617146653
-"Spagna","Demand-based CO2 emissions","Mean with Known Variance",296.131266949571,340.535399717096
-"Spagna","Demand-based CO2 emissions","Mean with Unknown Variance",294.900008050789,341.766658615878
-"Spagna","Demand-based CO2 emissions","Variance with Known Mean",1799.40787346448,5711.73067750566
-"Spagna","Demand-based CO2 emissions","Variance with Unknown Mean",1860.29844413585,6059.94913683642
-"Spagna","Renewable electricity, % total electricity generation","Mean with Known Variance",21.1272728188783,28.346060514455
-"Spagna","Renewable electricity, % total electricity generation","Mean with Unknown Variance",20.9271068425461,28.5462264907872
-"Spagna","Renewable electricity, % total electricity generation","Variance with Known Mean",47.5566626919295,150.955685602453
-"Spagna","Renewable electricity, % total electricity generation","Variance with Unknown Mean",49.1659433743364,160.158772938962
-"Spagna","Real GDP per capita","Mean with Known Variance",32521.044850137,34859.0634831963
-"Spagna","Real GDP per capita","Mean with Unknown Variance",32456.215158213,34923.8931751204
-"Spagna","Real GDP per capita","Variance with Known Mean",4988600.97647576,15834956.4072493
-"Spagna","Real GDP per capita","Variance with Unknown Mean",5157411.37504565,16800342.2832707
-"Spagna","Mortality from exposure to ambient PM2.5","Mean with Known Variance",242.944251291552,287.131582041781
-"Spagna","Mortality from exposure to ambient PM2.5","Mean with Unknown Variance",241.719003982152,288.356829351181
-"Spagna","Mortality from exposure to ambient PM2.5","Variance with Known Mean",1781.87964494705,5656.09208548784
-"Spagna","Mortality from exposure to ambient PM2.5","Variance with Unknown Mean",1842.17707392274,6000.918510795
-"Spagna","Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent","Mean with Known Variance",2.50181526019777,2.99068473980223
-"Spagna","Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent","Mean with Unknown Variance",2.48825965490631,3.00424034509369
-"Spagna","Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent","Variance with Known Mean",0.218106536429078,0.69231985335706
-"Spagna","Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent","Variance with Unknown Mean",0.225487092925561,0.734527472432925
-"Spagna","Environmentally related taxes, % GDP","Mean with Known Variance",1.82715703073325,1.98117630260008
-"Spagna","Environmentally related taxes, % GDP","Mean with Unknown Variance",1.82288631115715,1.98544702217618
-"Spagna","Environmentally related taxes, % GDP","Variance with Known Mean",0.0216487568794612,0.0687180881120677
-"Spagna","Environmentally related taxes, % GDP","Variance with Unknown Mean",0.0223813340678549,0.0729075200236209
-"Spagna","Terrestrial protected area, % land area","Mean with Known Variance",21.0568448371123,24.938988496221
-"Spagna","Terrestrial protected area, % land area","Mean with Unknown Variance",20.9491989125392,25.0466344207941
-"Spagna","Terrestrial protected area, % land area","Variance with Known Mean",13.7539055079947,43.658030613301
-"Spagna","Terrestrial protected area, % land area","Variance with Unknown Mean",14.219327032315,46.3196638407657
+"Italia","Production-based CO2 emissions","Mean with Known Variance",375.156429314408,412.448570685592
+"Italia","Production-based CO2 emissions","Mean with Unknown Variance",374.122375093412,413.482624906588
+"Italia","Production-based CO2 emissions","Variance with Known Mean",1269.16321234295,4028.61327973619
+"Italia","Production-based CO2 emissions","Variance with Unknown Mean",1312.11071380402,4274.21966223492
+"Italia","Demand-based CO2 emissions","Mean with Known Variance",483.704906124738,532.896760541929
+"Italia","Demand-based CO2 emissions","Mean with Unknown Variance",482.340891004437,534.26077566223
+"Italia","Demand-based CO2 emissions","Variance with Known Mean",2208.35668837307,7009.82741593202
+"Italia","Demand-based CO2 emissions","Variance with Unknown Mean",2283.08577063615,7437.18497894939
+"Italia","Renewable electricity, % total electricity generation","Mean with Known Variance",21.021211667743,28.4146216655903
+"Italia","Renewable electricity, % total electricity generation","Mean with Unknown Variance",20.816203681215,28.6196296521184
+"Italia","Renewable electricity, % total electricity generation","Variance with Known Mean",49.8852797820254,158.347246940937
+"Italia","Renewable electricity, % total electricity generation","Variance with Unknown Mean",51.5733590656733,168.000964436091
+"Italia","Real GDP per capita","Mean with Known Variance",37995.4346252781,39302.6620413886
+"Italia","Real GDP per capita","Mean with Unknown Variance",37959.1872021554,39338.9094645112
+"Italia","Real GDP per capita","Variance with Known Mean",1559499.09349696,4950205.53440114
+"Italia","Real GDP per capita","Variance with Unknown Mean",1612271.33661363,5251997.24025807
+"Italia","Mortality from exposure to ambient PM2.5","Mean with Known Variance",498.149004381398,567.626828951935
+"Italia","Mortality from exposure to ambient PM2.5","Mean with Unknown Variance",496.222490238709,569.553343094625
+"Italia","Mortality from exposure to ambient PM2.5","Variance with Known Mean",4405.29762398939,13983.4186309509
+"Italia","Mortality from exposure to ambient PM2.5","Variance with Unknown Mean",4554.36948827187,14835.9245992423
+"Italia","Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent","Mean with Known Variance",5.04541545638794,5.76041787694539
+"Italia","Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent","Mean with Unknown Variance",5.02558952942815,5.78024380390519
+"Italia","Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent","Variance with Known Mean",0.466549636637518,1.48093487388769
+"Italia","Welfare costs of premature mortalities from exposure to ambient PM2.5, GDP equivalent","Variance with Unknown Mean",0.482337315484717,1.5712207940879
+"Italia","Environmentally related taxes, % GDP","Mean with Known Variance",3.04354806734183,3.29311859932483
+"Italia","Environmentally related taxes, % GDP","Mean with Unknown Variance",3.03662785700946,3.30003880965721
+"Italia","Environmentally related taxes, % GDP","Variance with Known Mean",0.0568420118632812,0.180429500014107
+"Italia","Environmentally related taxes, % GDP","Variance with Unknown Mean",0.0587655015798177,0.191429472887508
+"Italia","Terrestrial protected area, % land area","Mean with Known Variance",13.10054438967,16.12195561033
+"Italia","Terrestrial protected area, % land area","Mean with Unknown Variance",13.0167652632586,16.2057347367414
+"Italia","Terrestrial protected area, % land area","Variance with Known Mean",8.33110305821118,26.4448197747565
+"Italia","Terrestrial protected area, % land area","Variance with Unknown Mean",8.61302114194154,28.0570411694926

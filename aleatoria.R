@@ -1,3 +1,5 @@
+### Inferenza Statisica ###
+
 # Creare una copia del dataset originale
 dataset_copy <- dataset
 
@@ -91,7 +93,7 @@ calculate_intervals <- function(data, num_intervals) {
   return(breaks)
 }
 
-paesi_selezionati <- c("Spagna")
+paesi_selezionati <- c("Italia")
 variabili_selezionate <- c(
   # Emissioni di CO2
   "Production-based CO2 emissions",
@@ -161,6 +163,7 @@ chi_square_test_custom <- function(data, breaks, variable_name) {
 
 
 
+
 # Fase di esplorazione e verifica delle ipotesi
 chi_square_results <- list()
 method_of_moments_results <- list()
@@ -192,29 +195,6 @@ write.csv(method_of_moments_df, "inferenzastatistica/method_of_moments_results.c
 chi_square_df <- do.call(rbind, lapply(chi_square_results, as.data.frame))
 write.csv(chi_square_df, "inferenzastatistica/chi_square_results.csv", row.names = TRUE)
 
-# Confronto della normalità in due diversi gruppi temporali per un singolo paese
-paesi <- c("Germania")
-compare_normality_results <- list()
-
-compare_normality <- function(data, group1_year, group2_year, variable, num_intervals = 4) {
-  data_group1 <- data %>%
-    filter(YEA == group1_year & Variable == variable & Country %in% paesi) %>%
-    pull(Value)
-  
-  data_group2 <- data %>%
-    filter(YEA == group2_year & Variable == variable & Country %in% paesi) %>%
-    pull(Value)
-  
-  result_group1 <- if (length(data_group1) > 10) chi_square_test_custom(data_group1, calculate_intervals(data_group1, num_intervals,variable)) else NULL
-  result_group2 <- if (length(data_group2) > 10) chi_square_test_custom(data_group2, calculate_intervals(data_group2, num_intervals,variable)) else NULL
-  
-  return(list(group1 = result_group1, group2 = result_group2))
-}
-
-# Esempio di confronto tra due gruppi temporali
-compare_normality_results <- compare_normality(dataset_copy, 1990, 2000, "Real GDP per capita")
-compare_normality_df <- do.call(rbind, lapply(compare_normality_results, as.data.frame))
-write.csv(compare_normality_df, "inferenzastatistica/compare_normality_results.csv", row.names = TRUE)
 
 # Creare un data frame per raccogliere tutti gli intervalli di confidenza con le etichette appropriate
 confidence_intervals_df <- data.frame(
